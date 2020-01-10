@@ -31,7 +31,7 @@ function mdidentity_admin_menu() {
  */
 
 function mdidentity_update_settings() {
-	register_setting('mdidentity-settings', 'api_key');
+	register_setting('mdidentity-settings', 'api_key', array('default' => 'xxx'));
 	register_setting('mdidentity-settings', 'star_color' );
 	register_setting('mdidentity-settings', 'showcase_max_char' );
 	register_setting('mdidentity-settings', 'showcase_hipaa_compliant' );

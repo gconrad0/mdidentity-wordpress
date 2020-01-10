@@ -70,7 +70,7 @@ function mdidentity_settings() {
 				<tr>
 					<th scope="row"><label for="api_key">API Key</label></th>
 					<td>
-						<input name="api_key" class="regular-text" type="text" id="api_key" value="' . esc_attr( get_option( 'api_key' ) ) . '" />
+						<input name="api_key" class="regular-text" type="text" id="api_key" value="' . esc_attr( get_option( 'api_key', true ) ) . '" />
 						<p class="description">Your API key can be found on your MDidentity practice profile page.</p>
 					</td>
 				</tr>
