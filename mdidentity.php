@@ -52,8 +52,7 @@ function mdidentity_plugin_action_links( $links, $file ) {
 
 	if ( $file == $this_plugin ) {
 		// The "page" query string value must be equal to the slug
-		// of the Settings admin page we defined earlier, which in
-		// this case equals "myplugin-settings".
+		// of the Settings admin page we defined earlier
 		$settings_link = '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/options-general.php?page=mdidentity-settings">Settings</a>';
 		array_unshift( $links, $settings_link );
 	}
