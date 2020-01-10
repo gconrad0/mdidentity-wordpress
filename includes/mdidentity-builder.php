@@ -1,8 +1,9 @@
 <?php
-/**/
+/**
+ * @return string
+ */
 
 function mdidentity_showcase_create() {
-
 
 	//Get options
 	$star_color = get_option( 'star_color' );
@@ -57,4 +58,3 @@ add_shortcode( 'mdidentity-showcase', 'mdidentity_showcase_create' );
 add_shortcode( 'mdidentity-read-reviews', 'mdidentity_read_reviews_create' );
 add_shortcode( 'mdidentity-doctor-badge', 'mdidentity_doctor_badge_create' );
 
-?>
