@@ -8,6 +8,8 @@
  * Author URI: https://www.linkedin.com/in/andrewjrost
  */
 
+
+
 include 'includes/mdidentity-builder.php';
 
 include 'includes/mdidentity-settings.php';
@@ -24,21 +26,24 @@ function mdidentity_admin_menu() {
 	add_options_page( $page_title, $menu_title, $capability, $menu_slug, $function );
 }
 
+/*
+ * Register Settings
+ */
 
-
-	function mdidentity_update_settings() {
-		register_setting( 'mdidentity-settings', 'api_key' );
-		register_setting( 'mdidentity-settings', 'star_color' );
-		register_setting( 'mdidentity-settings', 'showcase_max_char' );
-
+function mdidentity_update_settings() {
+	register_setting('mdidentity-settings', 'api_key');
+	register_setting('mdidentity-settings', 'star_color' );
+	register_setting('mdidentity-settings', 'showcase_max_char' );
+	register_setting('mdidentity-settings', 'showcase_hipaa_compliant' );
 
 }
-
 add_action('admin_init', 'mdidentity_update_settings');
 
-add_filter( 'plugin_action_links', 'myplugin_plugin_action_links', 10, 2 );
 
-function myplugin_plugin_action_links( $links, $file ) {
+
+add_filter( 'plugin_action_links', 'mdidentity_plugin_action_links', 10, 2 );
+
+function mdidentity_plugin_action_links( $links, $file ) {
 	static $this_plugin;
 
 	if ( ! $this_plugin ) {
