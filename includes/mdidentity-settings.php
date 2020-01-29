@@ -32,7 +32,6 @@ function mdidentity_settings() {
 		//submit_button( 'Save API Key' );
 		echo '
 </form>
-<button onclick="mdiVerify();">Verify API</button>
 	</div>';
 	}
 
