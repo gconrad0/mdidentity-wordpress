@@ -7,7 +7,9 @@ function mdidentity_settings() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( 'You do not have sufficient permissions to access this page.' );
 	}
-// If no API Key value found in DB, only display API Key field.
+
+
+	// If no API Key value found in DB, only display API Key field.
 	//Need to check API key is valid
 	if ( ! get_option( 'api_key' ) ) {
 		echo ' <div class="wrap">
@@ -27,8 +29,9 @@ function mdidentity_settings() {
 					</td>
 				</tr>
 			</table>';
-		submit_button('Save API Key');
-		echo '</form>
+		submit_button( 'Save API Key' );
+		echo '
+</form>
 	</div>';
 	}
 
@@ -37,6 +40,7 @@ function mdidentity_settings() {
 	// page, or you could include a file that handles the HTML output for you.
 
 	// If API Key value exists in DB, display the rest of the setting fields
+	//Need to verify response from api key before moving on
 	else {
 		echo '<div class="wrap">
 		<h1>General</h1>
@@ -46,26 +50,27 @@ function mdidentity_settings() {
 		do_settings_sections( 'mdidentity-settings' );
 
 		// Default value for star_color
-		if(!get_option('star_color')) {
-			$default_star_color = '#ffff01'; // new default star color
+		if ( ! get_option( 'star_color' ) ) {
+			$default_star_color = '#FFBE00'; // new default star color
 		} else {
-			$default_star_color = get_option('star_color');
+			$default_star_color = get_option( 'star_color' );
 		}
 
-
+		//working on defaults with wp_parse_args
+		/*
 		$defaults = array(
 			'default1' => '1',
 			'default2' => '2',
 		);
 		$options = wp_parse_args(get_option('plugin_options'), $defaults);
-
+*/
 
 		echo '
 			<table class="form-table">
 				<tr>
 					<th scope="row"><label for="api_key">API Key</label></th>
 					<td>
-						<input name="api_key" class="regular-text" type="text" id="api_key" value="' . esc_attr( get_site_option( 'api_key' ) ) . '" />
+						<input name="api_key" class="regular-text" type="text" id="api_key" value="' . esc_attr( get_option( 'api_key', true ) ) . '" />
 						<p class="description">Your API key can be found on your MDidentity practice profile page.</p>
 					</td>
 				</tr>
@@ -83,16 +88,28 @@ function mdidentity_settings() {
 				<tr>
 					<th scope="row"><label for="showcase_max_char">Max Character Count</label></th>
 					<td>
-						<input name="showcase_max_char" class="regular-text" type="number" id="showcase_max_char" value="' . esc_attr( get_site_option( 'showcase_max_char' ) ) . '" />
-						<p class="description">How many characters before appending "..." to the comment.</p>
+						<input name="showcase_max_char" class="regular-text" type="text" id="showcase_max_char" value="' . esc_attr( get_option( 'showcase_max_char' ) ) . '" />
+						<p class="description">Set how many characters before appending "..." to the review.</p>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row">HIPAA Compliant?</th>
-					<td><label><input name="showcase_hipaa_compliant" type="checkbox" value="yes" ' . checked( 'yes', get_site_option( 'showcase_hipaa_compliant' ), false ) . '> Yes, suppress reviewers name</label></td>
+					<td><label><input id="showcase_hipaa_compliant" name="showcase_hipaa_compliant" type="checkbox" value="yes" ' . checked( 'yes', get_option( 'showcase_hipaa_compliant' ), false ) . '> Yes, suppress reviewers name</label></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="showcase_max_char">Custom CSS</label></th>
+					<td>
+						<textarea rows="5" cols="100" name="showcase_css" class="regular-text" type="text" id="showcase_css">' . esc_attr( get_option( 'showcase_css' ) ) . '</textarea>
+						<p class="description">Extend the MDidentity showcase widget with you own CSS.</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="showcase_shortcode">Showcase Shortcode</label></th>
+					<td>
+						<input name="showcase_shortcode" class="regular-text" type="text" id="showcase_shortcode" value="[mdidentity-showcase]" readonly>
+					</td>
 				</tr>
 			</table>';
-			
 
 		submit_button();
 
@@ -100,6 +117,5 @@ function mdidentity_settings() {
 	</div>';
 	}
 }
-
 
 ?>
