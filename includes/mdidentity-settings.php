@@ -100,7 +100,7 @@ function mdidentity_settings() {
 					<th scope="row"><label for="showcase_max_char">Custom CSS</label></th>
 					<td>
 						<textarea rows="5" cols="100" name="showcase_css" class="regular-text" type="text" id="showcase_css">' . esc_attr( get_option( 'showcase_css' ) ) . '</textarea>
-						<p class="description">Extend the MDidentity showcase widget with you own CSS.</p>
+						<p class="description">Extend the MDidentity showcase widget with your own CSS.</p>
 					</td>
 				</tr>
 				<tr>
