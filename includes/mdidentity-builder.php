@@ -6,24 +6,29 @@
 function mdidentity_showcase_create() {
 
 	//Get options
-	$star_color = get_option( 'star_color' );
-	$api_key  = get_option( 'api_key' );
-	$max_char = get_option( 'showcase_max_char' );
-	$hippa    = get_option( 'showcase_hipaa_compliant' );
-	$showcase_css    = get_option( 'showcase_css' );
+	$star_color     = get_option( 'star_color' );
+	$api_key        = get_option( 'api_key' );
+	$max_char       = get_option( 'showcase_max_char' );
+	$hippa          = get_option( 'showcase_hipaa_compliant' );
+	$showcase_css   = get_option( 'showcase_css' );
+	$showcase_display_length = get_option( 'showcase_display_length' );
+	$showcase_display_trans_type  = get_option( 'showcase_display_trans_type' );
+	$showcase_display_trans_speed = get_option( 'showcase_display_trans_speed' );
 
 	//Strip # from $star_color
 	$star_color_strip = substr( $star_color, 1 );
 
 	//Because $hippa is a checkbox input we need to get a value 'no' if it is unchecked
-	if ( $hippa == '' ) {
-		$hipaa_value = 'no';
-	} else {
-		$hipaa_value = 'yes';
-	}
+	$hipaa_value = ($hippa=='' ? 'no' : 'yes');
+	
+	if ($showcase_display_length=="") $showcase_display_length=2500;
+	if ($showcase_display_trans_speed=="") $showcase_display_trans_speed=750;
+	if ($showcase_display_trans_type=="") $showcase_display_trans_type="fade";
+	if ($star_color=="") $star_color="FFBE00";
+	if ($max_char=="") $max_char=300;
 
 	//build script
-	$content = '<style>' . $showcase_css . '</style><script src="https://www.mdidentity.com/widgets/js/v2.0/mdiReviewShowcase.min.js" name="mdidentity" api-key="' . $api_key . '" star-color="' . $star_color_strip . '" hipaa-compliant="' . $hipaa_value . '" char-count="' . $max_char . '" defer></script><div id="mdiCarouselModule"></div>';
+	$content = '<style>' . $showcase_css . '</style><script src="https://www.mdidentity.com/widgets/js/v2.0/mdiReviewShowcase.js" name="mdidentity" api-key="' . $api_key . '" star-color="' . $star_color_strip . '" hipaa-compliant="' . $hipaa_value . '" char-count="' . $max_char . '" display-length="' . $showcase_display_length . '" transition-type="' . $showcase_display_trans_type . '" transition-speed="' . $showcase_display_trans_speed . '" defer></script><div id="mdiCarouselModule"></div>';
 
 	return $content;
 }
@@ -37,7 +42,7 @@ function mdidentity_read_reviews_create() {
 
 	$curl = curl_init();
 
-	$url = 'https://v2.mdidentity.com/embedapi/v1/118?type=htmloutput&template=2&filter=true&page=' . $page . '';
+	$url = 'https://v2.mdidentity.com/embedapi/v1/42?type=htmloutput&template=2&filter=true&page=' . $page . '';
 
 	curl_setopt_array( $curl, array(
 		CURLOPT_RETURNTRANSFER => 1,

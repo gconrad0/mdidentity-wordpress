@@ -50,10 +50,10 @@ function mdidentity_settings() {
 		do_settings_sections( 'mdidentity-settings' );
 
 		// Default value for star_color
-		if ( ! get_option( 'star_color' ) ) {
+		if ( ! get_option( 'showcase_star_color' ) ) {
 			$default_star_color = '#FFBE00'; // new default star color
 		} else {
-			$default_star_color = get_option( 'star_color' );
+			$default_star_color = get_option( 'showcase_star_color' );
 		}
 
 		//working on defaults with wp_parse_args
@@ -80,9 +80,9 @@ function mdidentity_settings() {
 			<table class="form-table">
 				
 				<tr>
-					<th scope="row"><label for="star_color">Star Color</label></th>
+					<th scope="row"><label for="showcase_star_color">Star Color</label></th>
 					<td>
-						<input type="color" name="star_color" id="star_color" value="' . esc_attr__( $default_star_color ) . '" />
+						<input type="color" name="showcase_star_color" id="showcase_star_color" value="' . esc_attr__( $default_star_color ) . '" />
 					</td>
 				</tr>
 				<tr>
@@ -95,6 +95,20 @@ function mdidentity_settings() {
 				<tr>
 					<th scope="row">HIPAA Compliant?</th>
 					<td><label><input id="showcase_hipaa_compliant" name="showcase_hipaa_compliant" type="checkbox" value="yes" ' . checked( 'yes', get_option( 'showcase_hipaa_compliant' ), false ) . '> Yes, suppress reviewers name</label></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="showcase_max_char">Time to Display</label></th>
+					<td>
+						<input name="showcase_display_length" class="regular-text" type="text" id="showcase_display_length" value="' . esc_attr( get_option( 'showcase_display_length' ) ) . '" />
+						<p class="description">How long should a review display in milliseconds.</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="showcase_max_char">Transition Speed</label></th>
+					<td>
+						<input name="showcase_display_trans_speed" class="regular-text" type="text" id="showcase_display_trans_speed" value="' . esc_attr( get_option( 'showcase_display_trans_speed' ) ) . '" />
+						<p class="description">Speed of transtion in milliseconds.</p>
+					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="showcase_max_char">Custom CSS</label></th>
